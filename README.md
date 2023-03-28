@@ -1,6 +1,6 @@
 # Financier (bun intended)
 
-Live version can be found here: TODO add link here
+Live version can be found here: [Financier frontend](https://financier.hireokkimus.xyz/)
 
 Frontend was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -14,6 +14,8 @@ This is a small project to demonstrate my skills in Node, Typescript and React.
 - [ ] backend with TS/Node/Express to fetch data from Alphavantage.co
 - [ ] package backend into Docker container
 - [ ] deploy project into cloud
+    - [x] frontend
+    - [ ] backend
 - [ ] make the code clean and awesome
 
 ## Running locally

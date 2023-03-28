@@ -10,7 +10,7 @@ This is a small project to demonstrate my skills in Node, Typescript and React.
 
 ### Spec
 
-- [ ] frontend application showing Apple stock price in graphical way (use HighCharts)
+- [x] frontend application showing Apple stock price in graphical way (use HighCharts)
 - [ ] backend with TS/Node/Express to fetch data from Alphavantage.co
 - [ ] package backend into Docker container
 - [ ] deploy project into cloud

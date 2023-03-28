@@ -4,8 +4,9 @@ import StockDatapoint from "../types/StockDatapoint";
 const processAplhaVantageStockData = (data: any): Array<StockDatapoint> => {
   const datapoints = data["Time Series (Daily)"];
   const dataKeys = Object.keys(datapoints);
+  const sortedKeys = [...dataKeys].sort();
 
-  const stockDatapoints = dataKeys.map((k) =>
+  const stockDatapoints = sortedKeys.map((k) =>
     apiDatapointToStockDatapoint(datapoints[k], k)
   );
 

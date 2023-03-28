@@ -76,5 +76,27 @@ describe("DataService", () => {
       expect(datapoint2[0]).toBe(1679961600000);
       expect(datapoint2[1]).toBe(161.28);
     });
+
+    it("should return list with points in time order", () => {
+      const data = {
+        "Time Series (Daily)": {
+          "2023-03-27": {
+            "4. close": "161.28",
+          },
+          "2023-03-28": {
+            "4. close": "161.28",
+          },
+          "2023-03-26": {
+            "4. close": "161.28",
+          },
+        },
+      };
+
+      const actual = sut(data);
+      expect(actual).toHaveLength(3);
+      expect(actual[0][0]).toBe(1679788800000);
+      expect(actual[1][0]).toBe(1679875200000);
+      expect(actual[2][0]).toBe(1679961600000);
+    });
   });
 });

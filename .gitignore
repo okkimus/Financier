@@ -2,3 +2,6 @@
 **/dist
 **/build
 **/.env
+
+**/.frontend_location
+**/.ssh_config_name

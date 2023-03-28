@@ -47,7 +47,7 @@ if [[ $target == "all" || $target == "frontend" ]]; then
 fi
 
 if [[ $target == "all" || $target == "backend" ]]; then
-  echo "Not backend process to replace.
+  echo "Not backend process to replace."
 fi
 
 if [[ $target == "all" || $target == "frontend" ]]; then

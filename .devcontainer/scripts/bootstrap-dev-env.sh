@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd src/frontend
+cd /workspace/src/frontend
 npm install

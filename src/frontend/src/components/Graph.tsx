@@ -1,48 +1,21 @@
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
-import data from "../data/mock.json";
 import DataService from "../service/DataService";
+import GraphOptions from "../configs/GraphOptions";
+import { useEffect, useState } from "react";
 
 const Graph = () => {
-  const options = {
-    title: {
-      text: "My chart",
-    },
-    rangeSelector: {
-      selected: 1,
-    },
-    series: [
-      {
-        name: "AAPL Stock Price",
-        data: DataService.processAplhaVantageStockData(data),
-        type: "area",
-        threshold: null,
-        tooltip: {
-          valueDecimals: 2,
-        },
-      },
-    ],
-    responsive: {
-      rules: [
-        {
-          condition: {
-            maxWidth: 500,
-          },
-          chartOptions: {
-            chart: {
-              height: 300,
-            },
-            subtitle: {
-              text: null,
-            },
-            navigator: {
-              enabled: false,
-            },
-          },
-        },
-      ],
-    },
-  };
+  const [options, setOptions] = useState(GraphOptions);
+
+  useEffect(() => {
+    DataService.fetchStockData("AAPL").then((d) => {
+      const newOptions = {
+        ...options,
+        series: [{ ...options.series[0], data: d }],
+      };
+      setOptions(newOptions);
+    });
+  }, []);
 
   return (
     <HighchartsReact

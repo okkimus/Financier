@@ -1,11 +1,17 @@
 import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import StockDataService from "./services/StockDataService";
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT;
+var corsOptions = {
+  origin: process.env.FRONTEND_URL,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 
 app.get("/", (req: Request, res: Response) => {
   res.send("API running");

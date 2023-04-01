@@ -21,7 +21,7 @@ This is a small project to demonstrate my skills in Node, Typescript and React.
 
 #### Personal additions
 
-- [ ] make possible to fetch other than Apple stock
+- [x] make possible to fetch other than Apple stock
 - [ ] would like the have the API response cached (Redis) to have faster response time and not making calls to AlphaVantage all the time
 
 ## Running locally
@@ -37,7 +37,12 @@ Devcontainer makes your life easy.
 - Open project in VS Code
 - Open command palette and run `Reopen in container`
 - Creates the devcontainer with correct Node version, and installs Node modules automatically
-- to run frontend you can use VS Code task (_Start frontend_), or manually by executing:
-  - `cd /workspace/src/frontend`
-  - `npm run start`
-  - frontend is running on [port 3000](http://localhost:3000)
+- you can run VS Code task (_Start locally_) to run both frontend and backend
+  - or run frontend you can use VS Code task (_Start frontend_), or manually by executing:
+    - `cd /workspace/src/frontend`
+    - `npm run start`
+    - frontend is running on [port 3000](http://localhost:3000)
+  - or run backend you can use VS Code task (_Start backend_), or manually by executing:
+    - `cd /workspace/src/backend`
+    - `npm run dev`
+    - backend is running on [port 3001](http://localhost:3001)

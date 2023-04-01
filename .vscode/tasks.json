@@ -8,6 +8,25 @@
 			"problemMatcher": [],
 			"label": "Start frontend",
 			"detail": "react-scripts start"
+		},
+		{
+			"type": "npm",
+			"script": "dev",
+			"path": "src/backend",
+			"problemMatcher": [],
+			"label": "Start backend",
+			"detail": "npm run dev"
+		},
+		{
+			"type": "shell",
+			"command": "echo 'Dev env running'",
+			"problemMatcher": [],
+			"label": "Start locally",
+			"detail": "Start backend and frontend",
+			"dependsOn": [
+				"Start backend",
+				"Start frontend"
+			]
 		}
 	]
 }

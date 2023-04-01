@@ -11,7 +11,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "REACT_APP_API_URL=http://localhost:3001 react-scripts start",
     "build": "REACT_APP_API_URL=https://api.financier.hireokkimus.xyz react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -36,15 +36,32 @@ const Graph = () => {
   };
 
   return (
-    <div>
-      <input ref={stockSymbolRef} type="text" />
-      <button onClick={handleDataSearch}>Fetch data</button>
-
+    <div className="md:w-2/3 w-full">
       <HighchartsReact
         highcharts={Highcharts}
         constructorType={"stockChart"}
         options={options}
       />
+
+      <div className="flex justify-center space-x-4">
+        <div className="space-x-2">
+          <label htmlFor="symbol">Symbol</label>
+          <input
+            id="symbol"
+            className="border border-gray-300 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500"
+            ref={stockSymbolRef}
+            type="text"
+            placeholder="AAPL"
+            required
+          />
+        </div>
+        <button
+          className="bg-sky-500 hover:bg-sky-700 rounded-lg text-white p-1"
+          onClick={handleDataSearch}
+        >
+          Fetch data
+        </button>
+      </div>
     </div>
   );
 };

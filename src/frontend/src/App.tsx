@@ -1,11 +1,10 @@
-import React from "react";
 import Graph from "./components/Graph";
 
 function App() {
   return (
-    <div>
+    <section className="flex justify-center text-center w-full">
       <Graph />
-    </div>
+    </section>
   );
 }
 

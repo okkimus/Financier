@@ -37,7 +37,12 @@ start=$(date +%s)
 
 
 if [[ $target == "all" || $target == "backend" ]]; then
-  echo "No backend build setup"
+  cd /workspace/src/backend
+  echo "Building backend image"
+  docker build . -t financier-backend
+
+  echo "Transfering image to remote"
+  docker save financier-backend | bzip2 | pv | ssh $configname docker load
 fi
 
 if [[ $target == "all" || $target == "frontend" ]]; then
@@ -47,7 +52,17 @@ if [[ $target == "all" || $target == "frontend" ]]; then
 fi
 
 if [[ $target == "all" || $target == "backend" ]]; then
-  echo "Not backend process to replace."
+  echo "Stopping old container"
+  ssh $configname docker stop financier-backend
+
+  echo "Removing old container"
+  ssh $configname docker container rm financier-backend
+
+  echo "Starting new docker container"
+  ssh $configname docker run -d -p 5124:8080 --restart=unless-stopped --name financier-backend --env-file financier/env.list financier-backend:latest
+
+  echo "Clearing dangling images"
+  ssh $configname docker rmi -f $(docker images -f "dangling=true" -q)
 fi
 
 if [[ $target == "all" || $target == "frontend" ]]; then

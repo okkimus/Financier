@@ -26,8 +26,17 @@ app.get("/stockdata", async (req: Request, res: Response) => {
     return res.send("Request missing 'ticker' query parameter");
   }
 
-  const data = await StockDataService.getStockData(ticker as string);
-  return res.send(data);
+  try {
+    const data = await StockDataService.getStockData(ticker as string);
+    return res.send(data);
+  } catch (e) {
+    res.status(500);
+    if (typeof e === "string") {
+      return res.send(e);
+    } else if (e instanceof Error) {
+      return res.send(e.message);
+    }
+  }
 });
 
 app.listen(port, () => {

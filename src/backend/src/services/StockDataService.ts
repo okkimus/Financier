@@ -4,9 +4,13 @@ import { processAplhaVantageStockData } from "../utils/AlphaVantageDataTransform
 
 const StockDataService = {
   async getStockData(ticker: string): Promise<StockDatapoint[]> {
-    const data = await AlphaVantageClient.getStockData(ticker);
+    const res = await AlphaVantageClient.getStockData(ticker);
 
-    return processAplhaVantageStockData(data);
+    if (res.error) {
+      throw Error("Error while fetching data");
+    }
+
+    return processAplhaVantageStockData(res.data);
   },
 };
 

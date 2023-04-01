@@ -1,10 +1,11 @@
 import axios from "axios";
 import config from "../configs/config";
+import ClientResponse from "../types/ClientResponse";
 
 const BASE_URL = "https://www.alphavantage.co";
 
 const AlphaVantageClient = {
-  getStockData: async (ticker: string): Promise<any> => {
+  getStockData: async (ticker: string): Promise<ClientResponse> => {
     try {
       const response = await axios.get(BASE_URL + "/query", {
         params: {
@@ -15,9 +16,35 @@ const AlphaVantageClient = {
         },
       });
 
-      return response.data;
+      const data = response.data;
+
+      if (data["Error Message"]) {
+        return {
+          data: null,
+          error: data["Error Message"],
+        };
+      }
+
+      return {
+        data: data,
+        error: null,
+      };
     } catch (e) {
-      console.error(e);
+      if (e instanceof Error) {
+        return {
+          data: null,
+          error: e.message,
+        };
+      } else if (typeof e === "string") {
+        return {
+          data: null,
+          error: e,
+        };
+      }
+      return {
+        data: null,
+        error: "Error while fetching data from AlphaVantage",
+      };
     }
   },
 };

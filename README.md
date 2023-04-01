@@ -5,18 +5,24 @@ Live version can be found here: [Financier frontend](https://financier.hireokkim
 Frontend was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 This is a small project to demonstrate my skills in Node, Typescript and React.
+
 - [frontend](./src/frontend)
 - [backend](./src/backend) TODO create the backend skeleton
 
 ### Spec
 
 - [x] frontend application showing Apple stock price in graphical way (use HighCharts)
-- [ ] backend with TS/Node/Express to fetch data from Alphavantage.co
-- [ ] package backend into Docker container
-- [ ] deploy project into cloud
-    - [x] frontend
-    - [ ] backend
+- [x] backend with TS/Node/Express to fetch data from Alphavantage.co
+- [x] package backend into Docker container
+- [x] deploy project into cloud
+  - [x] frontend
+  - [x] backend
 - [ ] make the code clean and awesome
+
+#### Personal additions
+
+- [ ] make possible to fetch other than Apple stock
+- [ ] would like the have the API response cached (Redis) to have faster response time and not making calls to AlphaVantage all the time
 
 ## Running locally
 
@@ -32,6 +38,6 @@ Devcontainer makes your life easy.
 - Open command palette and run `Reopen in container`
 - Creates the devcontainer with correct Node version, and installs Node modules automatically
 - to run frontend you can use VS Code task (_Start frontend_), or manually by executing:
-    - `cd /workspace/src/frontend`
-    - `npm run start`
-    - frontend is running on [port 3000](http://localhost:3000)
+  - `cd /workspace/src/frontend`
+  - `npm run start`
+  - frontend is running on [port 3000](http://localhost:3000)

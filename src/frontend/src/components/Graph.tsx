@@ -13,9 +13,13 @@ const Graph = () => {
   }, []);
 
   const updateData = (symbol: string) => {
+    const newTitle = `Stock data for ${symbol.toUpperCase()}`;
+    const titleObject = { title: { text: newTitle } };
+
     DataService.fetchStockData(symbol).then((d) => {
       const newOptions = {
         ...options,
+        ...titleObject,
         series: [{ ...options.series[0], data: d }],
       };
       setOptions(newOptions);

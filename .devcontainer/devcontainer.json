@@ -3,9 +3,12 @@
 {
 	"name": "Node.js & TypeScript",
 	"workspaceFolder": "/workspace",
-	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+	// "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"dockerFile": "./Dockerfile",
+	"service": "devcontainer",
+	"dockerComposeFile": [
+		"./docker-compose.yml"
+	],
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {}
 	},

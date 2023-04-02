@@ -2,6 +2,7 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import StockDataService from "./services/StockDataService";
+import CacheService from "./services/CacheService";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.get("/stockdata", async (req: Request, res: Response) => {
+  console.log("Stockdata");
   const { ticker } = req.query;
   console.log(ticker);
 
@@ -26,8 +28,14 @@ app.get("/stockdata", async (req: Request, res: Response) => {
     return res.send("Request missing 'ticker' query parameter");
   }
 
+  const cached = await CacheService.getValue(ticker as string);
+  if (cached) {
+    return res.send(cached);
+  }
+
   try {
     const data = await StockDataService.getStockData(ticker as string);
+    CacheService.setKey(ticker as string, JSON.stringify(data));
     return res.send(data);
   } catch (e) {
     res.status(500);

@@ -47,6 +47,28 @@ app.get("/stockdata", async (req: Request, res: Response) => {
   }
 });
 
+app.get("/tickers", async (req: Request, res: Response) => {
+  const { search } = req.query;
+  console.log("Search", search);
+
+  if (!search && typeof search !== "string") {
+    res.status(400);
+    return res.send("Request missing 'search' query parameter");
+  }
+
+  try {
+    const data = await StockDataService.getTickers(search as string);
+    return res.send(data);
+  } catch (e) {
+    res.status(500);
+    if (typeof e === "string") {
+      return res.send(e);
+    } else if (e instanceof Error) {
+      return res.send(e.message);
+    }
+  }
+});
+
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });

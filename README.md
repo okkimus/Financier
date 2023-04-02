@@ -22,7 +22,7 @@ This is a small project to demonstrate my skills in Node, Typescript and React.
 #### Personal additions
 
 - [x] make possible to fetch other than Apple stock
-- [ ] would like the have the API response cached (Redis) to have faster response time and not making calls to AlphaVantage all the time
+- [x] would like the have the API response cached (Redis) to have faster response time and not making calls to AlphaVantage all the time
 
 ## Running locally
 

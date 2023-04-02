@@ -1,4 +1,5 @@
 import Graph from "./components/Graph";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (

@@ -1,4 +1,4 @@
-# Financier (bun intended)
+# Financier (pun intended)
 
 Live version can be found here: [Financier frontend](https://financier.hireokkimus.xyz/)
 
@@ -7,7 +7,7 @@ Frontend was bootstrapped with [Create React App](https://github.com/facebook/cr
 This is a small project to demonstrate my skills in Node, Typescript and React.
 
 - [frontend](./src/frontend)
-- [backend](./src/backend) TODO create the backend skeleton
+- [backend](./src/backend)
 
 ### Spec
 
@@ -28,7 +28,7 @@ This is a small project to demonstrate my skills in Node, Typescript and React.
 
 You can run this is devcontainer with Docker, VS Code and [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
 
-Alternatively, you can run the project on host machine but that requires Node 18.
+Alternatively, you can run the project on host machine but that requires Node 18 and Redis.
 
 ### Devcontainer
 

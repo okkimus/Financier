@@ -19,7 +19,6 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.get("/stockdata", async (req: Request, res: Response) => {
-  console.log("Stockdata");
   const { ticker } = req.query;
   console.log(ticker);
 
@@ -30,6 +29,7 @@ app.get("/stockdata", async (req: Request, res: Response) => {
 
   const cached = await CacheService.getValue(ticker as string);
   if (cached) {
+    res.contentType("application/json");
     return res.send(cached);
   }
 

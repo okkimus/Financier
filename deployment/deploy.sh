@@ -59,7 +59,7 @@ if [[ $target == "all" || $target == "backend" ]]; then
   ssh $configname docker container rm financier-backend
 
   echo "Starting new docker container"
-  ssh $configname docker run -d -p 5124:8080 --restart=unless-stopped --name financier-backend --env-file financier/env.list financier-backend:latest
+  ssh $configname docker run -d -p 5124:8080 --network=financier --restart=unless-stopped --name financier-backend --env-file financier/env.list financier-backend:latest
 
   echo "Clearing dangling images"
   ssh $configname docker rmi -f $(docker images -f "dangling=true" -q)

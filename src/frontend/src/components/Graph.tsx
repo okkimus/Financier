@@ -2,7 +2,7 @@ import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
 import DataService from "../service/DataService";
 import GraphOptions from "../configs/GraphOptions";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import ErrorToast, { showError } from "./ErrorToast";
 
@@ -33,12 +33,23 @@ const Graph = () => {
       });
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      handleDataSearch();
+    }
+  };
+
   const handleDataSearch = () => {
     if (stockSymbolRef.current === null) {
       return;
     }
 
     const value = stockSymbolRef.current.value;
+
+    if (!value || value.length === 0) {
+      return;
+    }
+
     updateData(value);
   };
 
@@ -60,6 +71,7 @@ const Graph = () => {
             type="text"
             placeholder="AAPL"
             required
+            onKeyDown={handleKeyDown}
           />
         </div>
         <button

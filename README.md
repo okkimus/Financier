@@ -28,7 +28,7 @@ This is a small project to demonstrate my skills in Node, Typescript and React.
 
 You can run the project on host machine or in a devcontainer with Docker. Devcontainer is prefered as it makes the setup easier.
 
-#### Requirements
+### Requirements
 
 - (free) API key to [AlphaVantage](https://www.alphavantage.co/) (get yours [here](https://www.alphavantage.co/support/#api-key))
   - place the API key into `.env` file in backend project

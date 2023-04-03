@@ -14,6 +14,6 @@ const GraphOptions = {
       },
     },
   ],
-};
+} satisfies Highcharts.Options;
 
 export default GraphOptions;

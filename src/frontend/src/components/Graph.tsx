@@ -3,34 +3,28 @@ import HighchartsReact from "highcharts-react-official";
 import DataService from "../service/DataService";
 import GraphOptions from "../configs/GraphOptions";
 import React, { useEffect, useRef, useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import ErrorToast, { showError } from "./ErrorToast";
+import { updateOptions } from "../utils/OptionsUtils";
 
 const Graph = () => {
-  const [options, setOptions] = useState(GraphOptions);
+  const [options, setOptions] = useState<Highcharts.Options>(GraphOptions);
   const stockSymbolRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     updateData("AAPL");
   }, []);
 
-  const updateData = (symbol: string) => {
+  const updateData = async (symbol: string) => {
     const newTitle = `Stock data for ${symbol.toUpperCase()}`;
-    const titleObject = { title: { text: newTitle } };
 
-    DataService.fetchStockData(symbol)
-      .then((d) => {
-        const newOptions = {
-          ...options,
-          ...titleObject,
-          series: [{ ...options.series[0], data: d }],
-        };
-        setOptions(newOptions);
-      })
-      .catch((e) => {
-        const errorMsg = `Error fetching data. Check that the stock symbol (${symbol}) is correct.`;
-        showError(errorMsg);
-      });
+    try {
+      const data = await DataService.fetchStockData(symbol);
+      const newOptions = updateOptions(options, newTitle, data);
+      setOptions(newOptions);
+    } catch (e) {
+      const errorMsg = `Error fetching data. Check that the stock symbol (${symbol}) is correct.`;
+      showError(errorMsg);
+    }
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {

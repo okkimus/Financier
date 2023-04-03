@@ -12,7 +12,7 @@ const GraphOptions = {
       tooltip: {
         valueDecimals: 2,
       },
-    },
+    } satisfies Highcharts.SeriesAreaOptions,
   ],
 } satisfies Highcharts.Options;
 

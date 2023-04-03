@@ -1,7 +1,7 @@
 import * as Highcharts from "highcharts";
 import StockDatapoint from "../types/StockDatapoint";
 
-const updateOptions = (
+const createOptions = (
   options: Highcharts.Options,
   title: string,
   data: StockDatapoint[]
@@ -25,4 +25,4 @@ const updateOptions = (
   return newOptions;
 };
 
-export { updateOptions };
+export { createOptions };

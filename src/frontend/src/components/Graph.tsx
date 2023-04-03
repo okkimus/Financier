@@ -4,7 +4,7 @@ import DataService from "../service/DataService";
 import GraphOptions from "../configs/GraphOptions";
 import React, { useEffect, useRef, useState } from "react";
 import ErrorToast, { showError } from "./ErrorToast";
-import { updateOptions } from "../utils/OptionsUtils";
+import { createOptions } from "../utils/OptionsUtils";
 
 const Graph = () => {
   const [options, setOptions] = useState<Highcharts.Options>(GraphOptions);
@@ -19,7 +19,7 @@ const Graph = () => {
 
     try {
       const data = await DataService.fetchStockData(symbol);
-      const newOptions = updateOptions(options, newTitle, data);
+      const newOptions = createOptions(options, newTitle, data);
       setOptions(newOptions);
     } catch (e) {
       const errorMsg = `Error fetching data. Check that the stock symbol (${symbol}) is correct.`;

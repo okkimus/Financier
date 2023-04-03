@@ -11,19 +11,37 @@ const SET_OPTIONS = {
   NX: true, // Only add key if it doesn't exist
 } satisfies SetOptions;
 
-client.on("error", (err) => console.log("Redis Client Error", err));
-
-const setKey = async (key: string, value: string) => {
-  await client.connect();
-  await client.set(key, value, SET_OPTIONS);
-  await client.disconnect();
+/**
+ * Tries to set the key-value pair in Redis. Keys are set to expire
+ * after certain time.
+ * @param key Key to be set
+ * @param value Value to be set to the key
+ */
+const setKey = async (key: string, value: string): Promise<void> => {
+  try {
+    await client.connect();
+    await client.set(key, value, SET_OPTIONS);
+    await client.disconnect();
+  } catch (e) {
+    console.error("Error while setting key to Redis");
+  }
 };
 
+/**
+ * Tries to retrieve value with given key from Redis
+ * @param key Cache key to look for in Redis
+ * @returns Value if key is found and null if error happens
+ */
 const getValue = async (key: string) => {
-  await client.connect();
-  const value = await client.get(key);
-  await client.disconnect();
-  return value;
+  try {
+    await client.connect();
+    const value = await client.get(key);
+    await client.disconnect();
+    return value;
+  } catch (e) {
+    console.error("Error while setting key to Redis");
+    return null;
+  }
 };
 
 const CacheService = {

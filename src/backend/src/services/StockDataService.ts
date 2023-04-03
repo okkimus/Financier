@@ -1,11 +1,16 @@
 import StockDatapoint from "../types/StockDatapoint";
 import AlphaVantageClient from "../utils/AlphaVantageClient";
 import {
-  processAplhaVantageStockData,
+  transformAlphaVantageStockData,
   transformTickerSearchResult,
 } from "../utils/AlphaVantageDataTransforms";
 
 const StockDataService = {
+  /**
+   * Searches stock data from AlphaVantage and transforms it to StockDatapoint array.
+   * @param ticker Stock symbol to search data for
+   * @returns Array of StockDatapoint with timestamp and values
+   */
   async getStockData(ticker: string): Promise<StockDatapoint[]> {
     const res = await AlphaVantageClient.dailyAdjusted(ticker);
 
@@ -13,9 +18,14 @@ const StockDataService = {
       throw Error("Error while fetching data");
     }
 
-    return processAplhaVantageStockData(res.data);
+    return transformAlphaVantageStockData(res.data);
   },
 
+  /**
+   * Searches AlphaVantage for tickers with given search term and transforms them into TickerDetails array
+   * @param search Search term to look for i.e. company name or ticker ("Apple", "TSLA")
+   * @returns Array of TickerDetails
+   */
   async getTickers(search: string) {
     const res = await AlphaVantageClient.tickerSearch(search);
 

@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import StockDataService from "./services/StockDataService";
 import CacheService from "./services/CacheService";
+import { getErrorMessage } from "./utils/ErrorHandlers";
 
 dotenv.config();
 
@@ -20,16 +21,17 @@ app.get("/", (req: Request, res: Response) => {
 
 app.get("/stockdata", async (req: Request, res: Response) => {
   const { ticker } = req.query;
-  console.log(ticker);
+  console.log("Searching for ticker:", ticker);
+
+  res.contentType("application/json");
 
   if (!ticker && typeof ticker !== "string") {
     res.status(400);
-    return res.send("Request missing 'ticker' query parameter");
+    return res.send({ error: "Request missing 'ticker' query parameter" });
   }
 
   const cached = await CacheService.getValue(ticker as string);
   if (cached) {
-    res.contentType("application/json");
     return res.send(cached);
   }
 
@@ -53,7 +55,7 @@ app.get("/tickers", async (req: Request, res: Response) => {
 
   if (!search && typeof search !== "string") {
     res.status(400);
-    return res.send("Request missing 'search' query parameter");
+    return res.send({ error: "Request missing 'search' query parameter" });
   }
 
   try {
@@ -61,11 +63,9 @@ app.get("/tickers", async (req: Request, res: Response) => {
     return res.send(data);
   } catch (e) {
     res.status(500);
-    if (typeof e === "string") {
-      return res.send(e);
-    } else if (e instanceof Error) {
-      return res.send(e.message);
-    }
+    return res.send({
+      error: getErrorMessage(e, "Error while searching tickers"),
+    });
   }
 });
 

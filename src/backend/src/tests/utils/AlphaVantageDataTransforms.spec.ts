@@ -1,16 +1,16 @@
 import {
-  processAplhaVantageStockData,
+  transformAlphaVantageStockData,
   transformTickerSearchResult,
 } from "../../utils/AlphaVantageDataTransforms";
 import { beforeAll, describe, expect, it } from "@jest/globals";
 
 describe("AlphaVantageDataTransforms", () => {
-  describe("processAplhaVantageStockData", () => {
+  describe("transformAlphaVantageStockData", () => {
     it("should return empty list for empty data", () => {
       const emptyData = {
         "Time Series (Daily)": {},
       };
-      const actual = processAplhaVantageStockData(emptyData);
+      const actual = transformAlphaVantageStockData(emptyData);
       expect(actual).toStrictEqual([]);
     });
 
@@ -29,7 +29,7 @@ describe("AlphaVantageDataTransforms", () => {
           },
         },
       };
-      const actual = processAplhaVantageStockData(data);
+      const actual = transformAlphaVantageStockData(data);
       expect(actual).toHaveLength(1);
       const datapoint = actual[0];
       expect(datapoint[0]).toBe(1679875200000);
@@ -61,7 +61,7 @@ describe("AlphaVantageDataTransforms", () => {
           },
         },
       };
-      const actual = processAplhaVantageStockData(data);
+      const actual = transformAlphaVantageStockData(data);
       expect(actual).toHaveLength(2);
       const datapoint1 = actual[0];
       expect(datapoint1[0]).toBe(1679875200000);
@@ -86,7 +86,7 @@ describe("AlphaVantageDataTransforms", () => {
         },
       };
 
-      const actual = processAplhaVantageStockData(data);
+      const actual = transformAlphaVantageStockData(data);
 
       expect(actual).toHaveLength(3);
       expect(actual[0][0]).toBe(1679788800000);

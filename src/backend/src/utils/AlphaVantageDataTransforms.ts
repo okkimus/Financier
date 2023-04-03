@@ -3,7 +3,7 @@ import StockDatapoint from "../types/StockDatapoint";
 import TickerDetails from "../types/TickerDetails";
 import TickerSearchResult from "../types/TickerSearchResult";
 
-const processAplhaVantageStockData = (data: any): Array<StockDatapoint> => {
+const transformAlphaVantageStockData = (data: any): Array<StockDatapoint> => {
   const datapoints = data["Time Series (Daily)"];
   const dataKeys = Object.keys(datapoints);
   const sortedKeys = [...dataKeys].sort();
@@ -37,4 +37,4 @@ const transformTickerSearchResult = (data: any): TickerDetails[] => {
   }));
 };
 
-export { processAplhaVantageStockData, transformTickerSearchResult };
+export { transformAlphaVantageStockData, transformTickerSearchResult };

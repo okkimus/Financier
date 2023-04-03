@@ -17,7 +17,7 @@ This is a small project to demonstrate my skills in Node, Typescript and React.
 - [x] deploy project into cloud
   - [x] frontend
   - [x] backend
-- [ ] make the code clean and awesome
+- [x] make the code clean and awesome (at least in some standards)
 
 #### Personal additions
 
@@ -26,13 +26,27 @@ This is a small project to demonstrate my skills in Node, Typescript and React.
 
 ## Running locally
 
-You can run this is devcontainer with Docker, VS Code and [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers).
+You can run the project on host machine or in a devcontainer with Docker. Devcontainer is prefered as it makes the setup easier.
 
-Alternatively, you can run the project on host machine but that requires Node 18 and Redis.
+#### Requirements
+
+- (free) API key to [AlphaVantage](https://www.alphavantage.co/) (get yours [here](https://www.alphavantage.co/support/#api-key))
+  - place the API key into `.env` file in backend project
+
+Devcontainer route:
+
+- Docker
+- VS Code with [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) (or any IDE implementing devcontainer.json spec)
+
+On host machine:
+
+- Node 18 (optionally with `nvm` as you can run `nvm use` in the frontend and backend)
+- Redis (optional as code can live without it)
+- copy `.env-sample` file and rename it as `.env`
 
 ### Devcontainer
 
-Devcontainer makes your life easy.
+Devcontainer makes your life easy. It installs Node modules automatically, copies .env file, runs Redis and installs needed tooling for you.
 
 - Open project in VS Code
 - Open command palette and run `Reopen in container`
@@ -46,3 +60,31 @@ Devcontainer makes your life easy.
     - `cd /workspace/src/backend`
     - `npm run dev`
     - backend is running on [port 3001](http://localhost:3001)
+
+## Tests
+
+There are some tests for some parts of the application in frontend and backend. Not a major coverage but it's something.
+
+### Running tests
+
+> Expecting you to use devcontainer
+
+For frontend:
+
+```bash
+cd /workspace/src/frontend
+npm run test
+# or to get coverage as well
+npm run test -- --coverage
+```
+
+For backend:
+
+```bash
+cd /workspace/src/backend
+npm run test
+# or to get coverage as well
+npm run test:coverage
+# or in watch mode
+npm run test:watch
+```

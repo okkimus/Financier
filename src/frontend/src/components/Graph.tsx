@@ -6,12 +6,15 @@ import React, { useEffect, useRef, useState } from "react";
 import ErrorToast, { showError } from "./ErrorToast";
 import { createOptions } from "../utils/OptionsUtils";
 
+const APPLE_TICKER = "AAPL";
+
 const Graph = () => {
   const [options, setOptions] = useState<Highcharts.Options>(GraphOptions);
   const stockSymbolRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    updateData("AAPL");
+    // Show Apple stock price by default
+    updateData(APPLE_TICKER);
   }, []);
 
   const updateData = async (symbol: string) => {
@@ -27,19 +30,18 @@ const Graph = () => {
     }
   };
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
+  const handleEnter = (event: React.KeyboardEvent) => {
     if (event.key === "Enter") {
-      handleDataSearch();
+      searchForData();
     }
   };
 
-  const handleDataSearch = () => {
+  const searchForData = () => {
     if (stockSymbolRef.current === null) {
       return;
     }
 
     const value = stockSymbolRef.current.value;
-
     if (!value || value.length === 0) {
       return;
     }
@@ -63,14 +65,14 @@ const Graph = () => {
             className="border border-gray-300 text-lg rounded-lg focus:ring-blue-500 focus:border-blue-500"
             ref={stockSymbolRef}
             type="text"
-            placeholder="AAPL"
+            placeholder={APPLE_TICKER}
             required
-            onKeyDown={handleKeyDown}
+            onKeyDown={handleEnter}
           />
         </div>
         <button
           className="bg-sky-500 hover:bg-sky-700 rounded-lg text-white p-1"
-          onClick={handleDataSearch}
+          onClick={searchForData}
         >
           Fetch data
         </button>

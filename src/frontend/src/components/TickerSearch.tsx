@@ -7,7 +7,7 @@ const TickerSearch = () => {
   const [tickers, setTickers] = useState<TickerDetails[]>([]);
 
   const search = async (searchTerm: string) => {
-    DataService.searchForTickers(searchTerm).then((d) => setTickers(d));
+    DataService.searchForTickers(searchTerm).then((data) => setTickers(data));
   };
 
   return (

@@ -8,6 +8,11 @@ const fetchStockData = async (ticker: string): Promise<StockDatapoint[]> => {
   return await data.json();
 };
 
-const DataService = { fetchStockData };
+const searchForTickers = async (search: string): Promise<any> => {
+  const data = await fetch(`${BASE_URL}/tickers?search=${search}`);
+  return await data.json();
+};
+
+const DataService = { fetchStockData, searchForTickers };
 
 export default DataService;

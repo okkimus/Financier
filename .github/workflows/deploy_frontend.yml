@@ -35,4 +35,4 @@ jobs:
 
       - name: Deploy with rsync
         run: |
-          rsync -a build/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ vars.FRONTEND_LOCATION }}
+          rsync -a -e "ssh -o StrictHostKeyChecking=no" build/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ vars.FRONTEND_LOCATION }}

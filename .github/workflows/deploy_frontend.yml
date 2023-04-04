@@ -6,8 +6,8 @@ name: Build and deploy frontend
 on:
   push:
     branches: ["main"]
-  pull_request:
-    branches: ["main"]
+    paths:
+      - src/frontend/**
 
 jobs:
   build-and-deploy-frontend:

@@ -53,6 +53,8 @@ app.get("/tickers", async (req: Request, res: Response) => {
   const { search } = req.query;
   console.log("Search", search);
 
+  res.contentType("application/json");
+
   if (!search && typeof search !== "string") {
     res.status(400);
     return res.send({ error: "Request missing 'search' query parameter" });

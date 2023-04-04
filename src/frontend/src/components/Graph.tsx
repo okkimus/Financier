@@ -15,6 +15,7 @@ const Graph = () => {
   useEffect(() => {
     // Show Apple stock price by default
     updateData(APPLE_TICKER);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const updateData = async (symbol: string) => {

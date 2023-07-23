@@ -1,5 +1,8 @@
 # Financier (pun intended)
 
+| :exclamation:  Note that the app is currently working due to AlphaVantage endpoint used here became premium. Therefore data fetching won't work. Not going to update this for now. |
+|-----------------------------------------|
+
 Live version can be found here: [Financier frontend](https://financier.hireokkimus.xyz/)
 
 Frontend was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
